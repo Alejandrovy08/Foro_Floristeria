@@ -1,0 +1,29 @@
+{
+    "functions": {
+      "**/*.php": {
+        "runtime": "vercel-php@0.7.2"
+      }
+    },
+    "routes": [
+      {
+        "src": "/assets/(.*)",
+        "dest": "/assets/$1"
+      },
+      {
+        "src": "/uploads/(.*)",
+        "dest": "/uploads/$1"
+      },
+      {
+        "src": "/controlador/(.*)",
+        "dest": "/controlador/$1"
+      },
+      {
+        "src": "/",
+        "dest": "/vista/home.php"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/vista/$1"
+      }
+    ]
+  }
