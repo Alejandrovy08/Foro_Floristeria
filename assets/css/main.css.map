@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,WAAW,CACX,aAAa,CACb,WAAW,CACX,YAAY",
+"sources": ["../scss/main.scss"],
+"names": [],
+"file": "main.css"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "foro-floristeria",
+  "private": true,
+  "scripts": {
+    "build:css": "sass assets/scss/main.scss assets/css/main.css --style=compressed"
+  }
+}

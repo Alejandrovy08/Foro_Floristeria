@@ -1,0 +1,80 @@
+@use 'variables' as *;
+
+@mixin input-figma {
+  border: 1px solid $color-input-border;
+  border-radius: $radius-md;
+  padding: 0.85rem 1rem;
+  background: $color-white;
+  box-shadow: $shadow-input;
+  width: 100%;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: $color-cyan;
+    box-shadow: 0 0 0 3px rgba($color-cyan, 0.25);
+  }
+}
+
+@mixin btn-primary-figma {
+  background: $color-text;
+  color: $color-white;
+  border: 1px solid $color-text;
+  border-radius: $radius-lg;
+  padding: 0.7rem 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    background: #333;
+    color: $color-white;
+  }
+}
+
+@mixin btn-action-blue {
+  background: $color-action-blue;
+  color: $color-white;
+  border: none;
+  border-radius: $radius-lg;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+
+  &:hover {
+    background: $color-action-blue-hover;
+    color: $color-white;
+  }
+}
+
+@mixin btn-danger-figma {
+  background: $color-danger;
+  color: $color-white;
+  border: none;
+  border-radius: $radius-lg;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+
+  &:hover {
+    background: $color-danger-hover;
+    color: $color-white;
+  }
+}
+
+@mixin card-figma {
+  border: 3px solid $color-cyan;
+  border-radius: $radius-xl;
+  padding: 2rem 1.75rem;
+  background: linear-gradient(180deg, rgba($color-mint, 0.45) 0%, $color-white 35%);
+  box-shadow: $shadow-card;
+}
+
+@mixin avatar-circle($size: 82px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: $color-cyan-light;
+  border: 2px solid rgba($color-cyan, 0.5);
+}

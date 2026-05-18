@@ -1,0 +1,100 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+body {
+  font-family: $font-family-base;
+  color: $color-text;
+  background: $color-page-bg;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main.site-main {
+  flex: 1 0 auto;
+}
+
+a {
+  color: $color-text;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-action-blue;
+  }
+}
+
+.page-title {
+  font-family: $font-family-display;
+  font-size: clamp(1.75rem, 4vw, 2.8rem);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.feedback {
+  padding: 0.75rem 1rem;
+  border-radius: $radius-md;
+  margin-bottom: 1rem;
+
+  &.ok {
+    background: rgba($color-mint, 0.55);
+    border: 1px solid $color-mint-dark;
+  }
+
+  &.error,
+  &.aviso {
+    background: $color-warning-bg;
+    color: $color-warning-text;
+    border: 1px solid #ffeeba;
+  }
+}
+
+.btn-figma-primary {
+  @include btn-primary-figma;
+}
+
+.btn-figma-action {
+  @include btn-action-blue;
+}
+
+.btn-figma-outline {
+  border: 2px solid $color-cyan;
+  color: $color-text;
+  background: transparent;
+  border-radius: $radius-lg;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+
+  &:hover {
+    background: $color-cyan-light;
+    color: $color-text;
+  }
+}
+
+.btn-figma-danger {
+  @include btn-danger-figma;
+}
+
+.form-figma {
+  .form-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-text-muted;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-control {
+    @include input-figma;
+  }
+
+  textarea.form-control {
+    min-height: 140px;
+    resize: vertical;
+    border-radius: $radius-md;
+  }
+}
+
+.card-figma {
+  @include card-figma;
+}
