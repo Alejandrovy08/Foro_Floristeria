@@ -1,29 +1,16 @@
 {
-    "functions": {
-      "**/*.php": {
-        "runtime": "vercel-php@0.7.2"
-      }
-    },
+    "version": 2,
+    "plugins": [],
+    "builds": [
+      { "src": "controlador/**/*.php", "use": "vercel-php@0.7.2" },
+      { "src": "modelo/**/*.php", "use": "vercel-php@0.7.2" },
+      { "src": "vista/**/*.php", "use": "vercel-php@0.7.2" },
+      { "src": "*.php", "use": "vercel-php@0.7.2" }
+    ],
     "routes": [
-      {
-        "src": "/assets/(.*)",
-        "dest": "/assets/$1"
-      },
-      {
-        "src": "/uploads/(.*)",
-        "dest": "/uploads/$1"
-      },
-      {
-        "src": "/controlador/(.*)",
-        "dest": "/controlador/$1"
-      },
-      {
-        "src": "/",
-        "dest": "/vista/home.php"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/vista/$1"
-      }
+      { "src": "/assets/(.*)", "dest": "/assets/$1" },
+      { "src": "/uploads/(.*)", "dest": "/uploads/$1" },
+      { "src": "/", "dest": "/vista/home.php" },
+      { "src": "/(.*)", "dest": "/$1" }
     ]
   }
