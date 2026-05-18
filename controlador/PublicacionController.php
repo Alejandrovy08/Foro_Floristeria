@@ -8,7 +8,7 @@
 
     //Todas las acciones requieren sesión de administrador
     if ($accion !== '' && $adminId === null) {
-        header('Location: ../vista/admin.php?error=unauthorized');
+        header('Location: vista/admin.php?error=unauthorized');
         exit;
     }
     
@@ -19,21 +19,21 @@
 
         //Comprobamos si los datos estan vacios
         if ($titulo === '' || $texto === '') {
-            header('Location: ../vista/crear_publicacion.php?error=1');
+            header('Location: vista/crear_publicacion.php?error=1');
             exit;
         }
 
         $archivoImagen = $_FILES['imagen'] ?? null;
         $errImagen = is_array($archivoImagen) ? ($archivoImagen['error'] ?? UPLOAD_ERR_NO_FILE) : UPLOAD_ERR_NO_FILE;
         if ($errImagen !== UPLOAD_ERR_OK && $errImagen !== UPLOAD_ERR_NO_FILE) {
-            header('Location: ../vista/crear_publicacion.php?error=1');
+            header('Location: vista/crear_publicacion.php?error=1');
             exit;
         }
 
         require_once __DIR__ . '/../modelo/Imagen.php';
         $imagenModel = new Imagen();
         if ($errImagen === UPLOAD_ERR_OK && !$imagenModel->validar($archivoImagen)) {
-            header('Location: ../vista/crear_publicacion.php?error=1');
+            header('Location: vista/crear_publicacion.php?error=1');
             exit;
         }
 
@@ -45,11 +45,11 @@
             if ($errImagen === UPLOAD_ERR_OK) {
                 $imagenModel->subir($archivoImagen, (int) $nuevoId);
             }
-            header('Location: ../vista/admin.php?status=success');
+            header('Location: vista/admin.php?status=success');
             exit;
         }
         //Redirigimos a la vista de creación de publicacion con un error
-        header('Location: ../vista/crear_publicacion.php?error=1');
+        header('Location: vista/crear_publicacion.php?error=1');
         exit;
     }
 
@@ -57,7 +57,7 @@
         $imagenId = (int) ($_POST['imagen_id'] ?? 0);
         $pubId = (int) ($_POST['publicacion_id'] ?? 0);
         if ($imagenId <= 0 || $pubId <= 0) {
-            header('Location: ../vista/admin.php?error=1');
+            header('Location: vista/admin.php?error=1');
             exit;
         }
         require_once __DIR__ . '/../modelo/Imagen.php';
@@ -66,7 +66,7 @@
         if (is_array($fila) && (int) ($fila['publicacion_id'] ?? 0) === $pubId) {
             $imagenModel->eliminar($imagenId);
         }
-        header('Location: ../vista/editar_publicacion.php?id=' . $pubId);
+        header('Location: vista/editar_publicacion.php?id=' . $pubId);
         exit;
     }
 
@@ -76,21 +76,21 @@
         $texto = trim($_POST['texto'] ?? '');
 
         if ($id <= 0 || $titulo === '' || $texto === '') {
-            header('Location: ../vista/admin.php?error=1');
+            header('Location: vista/admin.php?error=1');
             exit;
         }
 
         $archivoImagen = $_FILES['imagen'] ?? null;
         $errImagen = is_array($archivoImagen) ? ($archivoImagen['error'] ?? UPLOAD_ERR_NO_FILE) : UPLOAD_ERR_NO_FILE;
         if ($errImagen !== UPLOAD_ERR_OK && $errImagen !== UPLOAD_ERR_NO_FILE) {
-            header('Location: ../vista/editar_publicacion.php?id=' . $id . '&error=1');
+            header('Location: vista/editar_publicacion.php?id=' . $id . '&error=1');
             exit;
         }
 
         require_once __DIR__ . '/../modelo/Imagen.php';
         $imagenModel = new Imagen();
         if ($errImagen === UPLOAD_ERR_OK && !$imagenModel->validar($archivoImagen)) {
-            header('Location: ../vista/editar_publicacion.php?id=' . $id . '&error=1');
+            header('Location: vista/editar_publicacion.php?id=' . $id . '&error=1');
             exit;
         }
 
@@ -101,7 +101,7 @@
             $imagenModel->subir($archivoImagen, $id);
         }
 
-        header('Location: ../vista/editar_publicacion.php?id=' . $id . '&guardado=1');
+        header('Location: vista/editar_publicacion.php?id=' . $id . '&guardado=1');
         exit;
     }
     //Al pulsar el enlace de "Eliminar" en la tabla de publicaciones eliminamos la publicacion mediante su ID
@@ -110,7 +110,7 @@
         $id = isset($_POST['id']) ? (int) $_POST['id'] : (isset($_GET['id']) ? (int) $_GET['id'] : 0);
         //Si el id es 0 detenemos el proceso de eliminar
         if ($id <= 0) {
-            header('Location: ../vista/admin.php?error=1');
+            header('Location: vista/admin.php?error=1');
             exit;
         }
         //Creamos una nueva instancia
@@ -118,12 +118,11 @@
         //Ejecutamos la sentecia SQL para eliminar la publicacion
         $publicacionModel->eliminar($id);
         //Volvemos al panel de administracion
-        header('Location: ../vista/admin.php');
+        header('Location: vista/admin.php');
         exit;
     }
 
     //Redirigimos a la vista de administración
-    header('Location: ../vista/admin.php');
+    header('Location: vista/admin.php');
     exit;
-
 ?>

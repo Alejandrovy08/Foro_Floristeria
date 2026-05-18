@@ -6,7 +6,7 @@
     }
     //Comprobamos si hay alguien logeado y en caso contrario lo mandamos al menu de login
     if (empty($_SESSION['usuario_id']) && empty($_SESSION['admin_id'])) {
-        header('Location: ../vista/login.php');
+        header('Location: vista/login.php');
         exit;
     }
 
@@ -41,6 +41,6 @@
         $comentarioModel->crear($texto, $usuarioId, $publicacionId, $adminId);
     }
 
-    header('Location: ../vista/detalle_publicacion.php?id=' . $publicacionId);
+    header('Location: vista/detalle_publicacion.php?id=' . $publicacionId);
     exit;
 ?>

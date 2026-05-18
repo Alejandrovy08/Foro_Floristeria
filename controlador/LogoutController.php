@@ -12,7 +12,6 @@
     //Se destruye la sesión
     session_destroy();
     //Se redirige a la página de inicio
-    header('Location: ../vista/home.php');
+    header('Location: vista/home.php');
     exit;
-
 ?>

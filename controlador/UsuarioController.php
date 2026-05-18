@@ -195,19 +195,19 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
         //Mostramos un mensaje dependiendo si los datos se han actualizado correctamente y si no un mensaje de error 
         if ($accion === 'editar_perfil') {
             $ok = $controller->editarPerfil();
-            header('Location: ' . ($ok ? '../vista/perfil.php?edit=ok' : '../vista/perfil.php?error=1'));
+            header('Location: ' . ($ok ? 'vista/perfil.php?edit=ok' : 'vista/perfil.php?error=1'));
             exit;
         }
 
         if ($accion === 'cambiar_password') {
             $ok = $controller->cambiarPassword();
-            header('Location: ' . ($ok ? '../vista/perfil.php?password=ok' : '../vista/perfil.php?error=1'));
+            header('Location: ' . ($ok ? 'vista/perfil.php?password=ok' : 'vista/perfil.php?error=1'));
             exit;
         }
 
         if ($accion === 'baja_usuario') {
             $ok = $controller->bajaUsuario();
-            header('Location: ' . ($ok ? '../vista/login.php?baja=ok' : '../vista/perfil.php?error=1'));
+            header('Location: ' . ($ok ? 'vista/login.php?baja=ok' : 'vista/perfil.php?error=1'));
             exit;
         }
 
@@ -219,7 +219,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
             $nombre = trim((string) ($_POST['nombre'] ?? ''));
             $correo = trim((string) ($_POST['correo'] ?? ''));
             $ok = $controller->editarUsuarioPorAdmin($uid, $nombre, $correo);
-            header('Location: ' . ($ok ? '../vista/editar_usuario.php?id=' . $uid . '&edit=ok' : '../vista/editar_usuario.php?id=' . $uid . '&error=1'));
+            header('Location: ' . ($ok ? 'vista/editar_usuario.php?id=' . $uid . '&edit=ok' : 'vista/editar_usuario.php?id=' . $uid . '&error=1'));
             exit;
         }
 
@@ -230,21 +230,21 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
             $uid = (int) ($_POST['usuario_id'] ?? 0);
             $nueva = $_POST['nuevaPassword'] ?? '';
             $ok = $controller->cambiarPasswordUsuarioPorAdmin($uid, (string) $nueva);
-            header('Location: ' . ($ok ? '../vista/editar_usuario.php?id=' . $uid . '&password=ok' : '../vista/editar_usuario.php?id=' . $uid . '&error=1'));
+            header('Location: ' . ($ok ? 'vista/editar_usuario.php?id=' . $uid . '&password=ok' : 'vista/editar_usuario.php?id=' . $uid . '&error=1'));
             exit;
         }
 
         // Si llega accion=registrar procesamos el alta de usuario.
         if ($accion === 'registrar') {
             $ok = $controller->procesarRegistro();
-            header('Location: ' . ($ok ? '../vista/login.php?registro=exito' : '../vista/registro.php?error=1'));
+            header('Location: ' . ($ok ? 'vista/login.php?registro=exito' : 'vista/registro.php?error=1'));
             exit;
         }
 
         // En caso contrario, tratamos el POST como login.
         $ok = $controller->procesarLogin();//Llama al metodo procesarLogin del controlador UsuarioController
         //Redirige al home si el usuario esta logeado y en caso contrario lo manda otra vez al login
-        header('Location: ' . ($ok ? '../vista/home.php' : '../vista/login.php?error=1'));
+        header('Location: ' . ($ok ? 'vista/home.php' : 'vista/login.php?error=1'));
         exit;
     }
 
@@ -254,7 +254,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
         }
 
         if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === '' || $_SESSION['admin_id'] === null) {
-            header('Location: ../vista/login.php');
+            header('Location: vista/login.php');
             exit;
         }
 
@@ -264,11 +264,11 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
             $usuarioModel->eliminarUsuario($usuarioId);
         }
 
-        header('Location: ../vista/admin.php?tab=usuarios');
+        header('Location: vista/admin.php?tab=usuarios');
         exit;
     }
 
-    header('Location: ../vista/login.php');//Redirige a la vista login.php
+    header('Location: vista/login.php');//Redirige a la vista login.php
     exit;
 }
 
@@ -282,7 +282,7 @@ if (php_sapi_name() !== 'cli') {
 
         //Verificamos que el usuario es un administrador en caso contrario lo redirige al login
         if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === '' || $_SESSION['admin_id'] === null) {
-            header('Location: ../vista/login.php');
+            header('Location: vista/login.php');
             exit;
         }
         /*
@@ -296,7 +296,7 @@ if (php_sapi_name() !== 'cli') {
             $usuarioModel->eliminarUsuario($usuarioId);
         }
         //Volvemos al panel de administracion
-        header('Location: ../vista/admin.php?tab=usuarios');
+        header('Location: vista/admin.php?tab=usuarios');
         exit;
     }
 }

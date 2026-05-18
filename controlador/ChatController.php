@@ -20,15 +20,15 @@
     }   
     //Comprobamos que la sesion del usuario o del admin esta activa
     if ($usuarioIdSesion === null && $adminIdSesion === null) {
-        header('Location: ../vista/login.php');
+        header('Location: vista/login.php');
         exit;
     }   
     //Comprobamos que el metodo de la peticion es POST
     if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
         if ($adminIdSesion !== null) {
-            header('Location: ../vista/admin_chats.php');
+            header('Location: vista/admin_chats.php');
         } else {
-            header('Location: ../vista/chat.php');
+            header('Location: vista/chat.php');
         }
         exit;
     }
@@ -44,12 +44,12 @@
     if ($adminIdSesion !== null) {
         //Comprobamos que el usuario destino es un numero entero
         if ($usuarioDestino <= 0) {
-            header('Location: ../vista/admin_chats.php?error=1');
+            header('Location: vista/admin_chats.php?error=1');
             exit;
         }
         //Comprobamos que el texto no esta vacio
         if ($texto === '') {
-            header('Location: ../vista/chat.php?u=' . $usuarioDestino . '&error=1');
+            header('Location: vista/chat.php?u=' . $usuarioDestino . '&error=1');
             exit;
         }
 
@@ -57,15 +57,15 @@
         $usuarioModel = new Usuario();
         //Comprobamos que el usuario destino existe
         if ($usuarioModel->obtenerPorId($usuarioDestino) === false) {
-            header('Location: ../vista/admin_chats.php?error=1');
+            header('Location: vista/admin_chats.php?error=1');
             exit;
         }
         //Comprobamos que el mensaje se ha enviado correctamente
         $ok = $mensajeModel->enviar($usuarioDestino, $adminIdSesion, $texto, 'admin');
         if ($ok) {
-            header('Location: ../vista/chat.php?u=' . $usuarioDestino);
+            header('Location: vista/chat.php?u=' . $usuarioDestino);
         } else {
-            header('Location: ../vista/chat.php?u=' . $usuarioDestino . '&error=1');
+            header('Location: vista/chat.php?u=' . $usuarioDestino . '&error=1');
         }
         exit;
     }
@@ -73,7 +73,7 @@
     //Comprobamos que el usuario esta logueado
     if ($usuarioIdSesion !== null && $adminIdSesion === null) {
         if ($texto === '') {
-            header('Location: ../vista/chat.php?error=1');
+            header('Location: vista/chat.php?error=1');
             exit;
         }
 
@@ -83,16 +83,16 @@
             $adminAsignado = $mensajeModel->obtenerPrimerAdministradorId();
         }
         if ($adminAsignado <= 0) {
-            header('Location: ../vista/chat.php?error=1');
+            header('Location: vista/chat.php?error=1');
             exit;
         }
 
         //Comprobamos que el mensaje se ha enviado correctamente
         $ok = $mensajeModel->enviar($usuarioIdSesion, $adminAsignado, $texto, 'usuario');
-        header('Location: ../vista/chat.php' . ($ok ? '' : '?error=1'));
+        header('Location: vista/chat.php' . ($ok ? '' : '?error=1'));
         exit;
     }
 
-    header('Location: ../vista/chat.php');
+    header('Location: vista/chat.php');
 exit;
 ?>

@@ -48,7 +48,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
         //Comprueba si la acción es login_admin
         if ($accion === 'login_admin') {
             $ok = $controller->procesarLogin();
-            header('Location: ' . ($ok ? '../vista/admin.php' : '../vista/login_admin.php?error=1'));
+            header('Location: ' . ($ok ? 'vista/admin.php' : 'vista/login_admin.php?error=1'));
             exit;
         } elseif ($accion === 'editar_perfil_admin') {
             //Verificamos si la sesion esta activa
@@ -57,7 +57,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
             }
 
             if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === '' || $_SESSION['admin_id'] === null) {
-                header('Location: ../vista/login_admin.php');
+                header('Location: vista/login_admin.php');
                 exit;
             }
 
@@ -67,7 +67,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
 
             //Validamos si los datos introducidos no estan vacios
             if ($nombre === null || $correo === null || $telefono === null || $nombre === '' || $correo === '' || $telefono === '') {
-                header('Location: ../vista/admin.php?tab=perfil&error=1');
+                header('Location: vista/admin.php?tab=perfil&error=1');
                 exit;
             }
 
@@ -80,7 +80,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
                 $_SESSION['admin_nombre'] = $nombre;
             }
             //Redirigimos al usuario al panel de administracion
-            header('Location: ' . ($ok ? '../vista/admin.php?tab=perfil&status=success' : '../vista/admin.php?tab=perfil&error=1'));
+            header('Location: ' . ($ok ? 'vista/admin.php?tab=perfil&status=success' : 'vista/admin.php?tab=perfil&error=1'));
             exit;
             //Comprobamos que la accion es la de cambiar la contraseña
         } elseif ($accion === 'cambiar_password_admin') {
@@ -90,7 +90,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
             }
             //Verificamos que el usuario activo es un administrador en caso contrario lo manda al login
             if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === '' || $_SESSION['admin_id'] === null) {
-                header('Location: ../vista/login_admin.php');
+                header('Location: vista/login_admin.php');
                 exit;
             }
             //Recibimos la nueva contraseña y si dicha contraseña NO existe le asignamos null
@@ -98,7 +98,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
 
             //Comprobamos que la contraseña introducida no esta vacia
             if ($nuevaPassword === null || $nuevaPassword === '') {
-                header('Location: ../vista/admin.php?tab=perfil&error=1');
+                header('Location: vista/admin.php?tab=perfil&error=1');
                 exit;
             }
             
@@ -106,13 +106,12 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
             $adminId = (int) $_SESSION['admin_id'];
             $ok = $adminModel->actualizarPassword($adminId, $nuevaPassword);
             //Redirigimos al usuario al panel con parametro de exito o de error 
-            header('Location: ' . ($ok ? '../vista/admin.php?tab=perfil&status=success' : '../vista/admin.php?tab=perfil&error=1'));
+            header('Location: ' . ($ok ? 'vista/admin.php?tab=perfil&status=success' : 'vista/admin.php?tab=perfil&error=1'));
             exit;
         }
     }
 
-    header('Location: ../vista/login_admin.php');
+    header('Location: vista/login_admin.php');
     exit;
 }
-
 ?>
