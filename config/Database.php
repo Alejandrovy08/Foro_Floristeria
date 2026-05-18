@@ -15,10 +15,12 @@
                 return $this->connection; //Devuelve la conexion a la base de datos
             }
 
-            $host = getenv('DB_HOST') ?: ($this->env['DB_HOST'] ?? 'localhost'); //Host de la base de datos
-            $dbName = getenv('DB_NAME') ?: ($this->env['DB_NAME'] ?? ''); //Nombre de la base de datos
-            $user = getenv('DB_USER') ?: ($this->env['DB_USER'] ?? ''); //Usuario de la base de datos
-            $pass = getenv('DB_PASS') ?: ($this->env['DB_PASS'] ?? ''); //Contraseña de la base de datos
+            // Prioridad absoluta a las variables globales de producción (Vercel/Railway)
+            $host = $_ENV['DB_HOST'] ?? $_SERVER['DB_HOST'] ?? getenv('DB_HOST') ?: ($this->env['DB_HOST'] ?? 'localhost'); 
+            $dbName = $_ENV['DB_NAME'] ?? $_SERVER['DB_NAME'] ?? getenv('DB_NAME') ?: ($this->env['DB_NAME'] ?? ''); 
+            $user = $_ENV['DB_USER'] ?? $_SERVER['DB_USER'] ?? getenv('DB_USER') ?: ($this->env['DB_USER'] ?? ''); 
+            $pass = $_ENV['DB_PASS'] ?? $_SERVER['DB_PASS'] ?? getenv('DB_PASS') ?: ($this->env['DB_PASS'] ?? ''); 
+
             //DSN (Data Source Name) es una cadena de caracteres que contiene la informacion necesaria para conectar a la base de datos
             $dsn = "mysql:host={$host};dbname={$dbName};charset=utf8mb4"; 
 
