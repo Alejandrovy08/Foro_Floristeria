@@ -25,7 +25,7 @@
                     <li class="nav-item"><a class="nav-link" href="/vista/home.php">Inicio</a></li>
                     <?php if (!empty($_SESSION['usuario_id']) || !empty($_SESSION['admin_id'])): ?>
                         <?php
-                        $esAdminNav = !empty($_SESSION['admin_id']) || (($_SESSION['usuario_tipo'] ?? '') === 'administrador');
+                        $esAdminNav = !empty($_SESSION['admin_id']) || (($_SESSION['usuario_tipo'] ?? '') === 'admin') || (($_SESSION['usuario_tipo'] ?? '') === 'administrador');
                         $enlacePerfilNav = $esAdminNav ? '/vista/admin.php' : '/vista/perfil.php';
                         $enlaceChatNav = $esAdminNav ? '/vista/admin_chats.php' : '/vista/chat.php';
                         ?>
