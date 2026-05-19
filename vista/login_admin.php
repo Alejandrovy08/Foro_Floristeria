@@ -23,16 +23,16 @@ require __DIR__ . '/partials/header.php';
                 <input type="hidden" name="accion" value="login_admin">
 
                 <div class="mb-3">
-                    <label class="form-label" for="correo">Correo Electrónico</label>
+                    <label class="form-label" for=\"correo\">Correo Electrónico</label>
                     <input type="email" class="form-control" id="correo" name="correo" required>
                 </div>
 
                 <div class="mb-4">
-                    <label class="form-label" for="password">Contraseña</label>
+                    <label class="form-label" for="password\">Contraseña</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
 
-                <button type="submit" class="btn-figma-primary w-100">Iniciar sesión</button>
+                <button type="submit" class="btn-figma-primary w-100">Iniciar Sesión como Admin</button>
             </form>
         </div>
     </div>
@@ -40,3 +40,4 @@ require __DIR__ . '/partials/header.php';
 <?php
 require __DIR__ . '/partials/footer.php';
 require __DIR__ . '/partials/foot.php';
+?>
