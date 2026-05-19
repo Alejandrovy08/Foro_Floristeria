@@ -62,7 +62,7 @@ class AdminController {
 
         $adminModel = new Administrador();
         $adminId = (int) $_SESSION['admin_id'];
-        $ok = $adminModel->actualizarDatos($adminId, $nombre, $correo, $telefono);
+        $ok = $adminModel->actualizarPerfil($adminId, $nombre, $correo, $telefono);
         //Redirigimos al usuario al panel con parametro de exito o de error 
         header('Location: ' . ($ok ? '/vista/admin.php?tab=perfil&status=success' : '/vista/admin.php?tab=perfil&error=1'));
         exit;
@@ -79,7 +79,7 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
         //Comprueba si la acción es login_admin
         if ($accion === 'login_admin') {
             $ok = $controller->procesarLogin();
-            // CORRECCIÓN DIRECTA: Redirección absoluta a la raíz de la vista
+            // CORRECCIÓN: Forzamos la redirección absoluta a la raíz de la vista publica
             header('Location: ' . ($ok ? '/vista/admin.php' : '/vista/login_admin.php?error=1'));
             exit;
             
@@ -145,4 +145,3 @@ if (php_sapi_name() !== 'cli' && basename(__FILE__) === basename($_SERVER['SCRIP
     header('Location: /vista/login_admin.php');
     exit;
 }
-?>
