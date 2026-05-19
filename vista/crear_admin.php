@@ -1,43 +1,55 @@
-<?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Creador de Administrador</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
+        h2 { margin-top: 0; color: #333; text-align: center; }
+        .group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #666; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #22c55e; color: white; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #16a34a; }
+        .msg { padding: 10px; margin-bottom: 15px; border-radius: 4px; text-align: center; font-weight: bold; }
+        .success { background: #d1fae5; color: #065f46; }
+        .error { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
 
-try {
-    // Datos para conexión externa obligatoria desde Vercel
-    $host = 'centerbeam.proxy.rlwy.net'; 
-    $port = '41820'; 
-    $dbname = 'railway'; 
+<div class="card">
+    <h2>Registro Administrador Real</h2>
     
-    // CAMBIO CRUCIAL: El usuario root se bloquea desde fuera. Usamos las credenciales de Railway.
-    $user = 'root'; 
-    $pass = 'UCAdYQU1ZzrbVYQHCuKHJyrQkzsuXGLl'; 
+    <?php if (isset($_GET['status']) && $_GET['status'] === 'success'): ?>
+        <div class="msg success">¡Administrador creado con éxito! Ya puedes iniciar sesión en tu login habitual.</div>
+    <?php elseif (isset($_GET['error'])): ?>
+        <div class="msg error">Error al registrar. Revisa la conexión.</div>
+    <?php endif; ?>
 
-    // Intentamos la conexión PDO con el juego de caracteres correcto
-    $db = new PDO("mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4", $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    <form action="../controlador/UsuarioController.php" method="POST">
+        <input type="hidden" name="accion" value="crear_admin_maestro_temporal">
+        
+        <div class="group">
+            <label>Nombre del Administrador:</label>
+            <input type="text" name="nombre" value="Alejandro Administrador" required>
+        </div>
+        <div class="group">
+            <label>Correo Electrónico:</label>
+            <input type="email" name="correo" value="admin@yerga.com" required>
+        </div>
+        <div class="group">
+            <label>Teléfono:</label>
+            <input type="text" name="telefono" value="600123456" required>
+        </div>
+        <div class="group">
+            <label>Contraseña para acceder:</label>
+            <input type="password" name="password" placeholder="Escribe tu contraseña aquí" required>
+        </div>
+        <button type="submit">Generar e Insertar Hash</button>
+    </form>
+</div>
 
-    // 1. Forzar de verdad la estructura correcta de la tabla
-    $db->exec("ALTER TABLE ADMINISTRADOR MODIFY contrasena VARCHAR(255) NOT NULL");
-
-    // 2. Limpiar registros rotos anteriores
-    $db->exec("DELETE FROM ADMINISTRADOR");
-
-    // 3. Insertar el administrador seguro desde el entorno PHP de Vercel
-    $password_claro = 'Admin1234*';
-    $password_encriptado = password_hash($password_claro, PASSWORD_DEFAULT);
-
-    $stmt = $db->prepare("INSERT INTO ADMINISTRADOR (nombre, correo, contrasena, telefono) VALUES (?, ?, ?, ?)");
-    $stmt->execute([
-        'Alejandro Administrador',
-        'admin@yerga.com',
-        $password_encriptado,
-        '600123456'
-    ]);
-
-    echo "<h1>¡ÉXITO ROTUNDO!</h1>";
-    echo "<p>El servidor ha aceptado la conexión remota, ha ensanchado la columna e insertado el hash completo.</p>";
-    echo "<p>Ya puedes probar a iniciar sesión como administrador en tu web.</p>";
-
-} catch (Exception $e) {
-    echo "<h1>Error en la automatización:</h1>" . $e->getMessage();
-}
+</body>
+</html>
