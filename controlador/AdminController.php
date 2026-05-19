@@ -40,17 +40,14 @@ class AdminController {
 
     //Funcion con la que editamos el perfil de un administrador
     public function procesarEditarPerfil() {
-        //Verificamos si la sesion esta activa
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
-        //Verificamos que el usuario activo es un administrador en caso contrario lo manda al login
         if (!isset($_SESSION['admin_id']) || $_SESSION['admin_id'] === '' || $_SESSION['admin_id'] === null) {
             header('Location: /vista/login_admin.php');
             exit;
         }
 
-        //Comprobamos que los campos requeridos no estan vacios
         $nombre = $_POST['nombre'] ?? null;
         $correo = $_POST['correo'] ?? null;
         $telefono = $_POST['telefono'] ?? null;
@@ -63,10 +60,9 @@ class AdminController {
         $adminModel = new Administrador();
         $adminId = (int) $_SESSION['admin_id'];
         
-        // ESTA ES LA LÍNEA QUE DEBE LLAMAR A actualizarDatos, NO a actualizarPerfil
+        // CORRECCIÓN: Aquí es donde debe estar la llamada real al modelo
         $ok = $adminModel->actualizarDatos($adminId, $nombre, $correo, $telefono);
         
-        //Redirigimos al usuario al panel con parametro de exito o de error 
         header('Location: ' . ($ok ? '/vista/admin.php?tab=perfil&status=success' : '/vista/admin.php?tab=perfil&error=1'));
         exit;
     }
