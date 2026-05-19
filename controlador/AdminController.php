@@ -62,7 +62,7 @@ class AdminController {
 
         $adminModel = new Administrador();
         $adminId = (int) $_SESSION['admin_id'];
-        $ok = $adminModel->actualizarPerfil($adminId, $nombre, $correo, $telefono);
+        $ok = $adminModel->actualizarDatos($adminId, $nombre, $correo, $telefono);
         //Redirigimos al usuario al panel con parametro de exito o de error 
         header('Location: ' . ($ok ? '/vista/admin.php?tab=perfil&status=success' : '/vista/admin.php?tab=perfil&error=1'));
         exit;

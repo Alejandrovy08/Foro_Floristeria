@@ -113,6 +113,11 @@ class Administrador
             return false;
         }
     }
+
+    public function actualizarPerfil($id, $nombre, $correo, $telefono) {
+        // Simplemente llamamos a la función que ya tenías creada (actualizarDatos)
+        return $this->actualizarDatos($id, $nombre, $correo, $telefono);
+    }
 }
 
 ?>
