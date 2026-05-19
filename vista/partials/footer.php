@@ -16,7 +16,7 @@
                 <p class="mb-0 small">Floristería Yerga — Foro y atención al cliente</p>
             </div>
             <div class="col-12 col-md-6 text-md-end mt-2 mt-md-0">
-                <a href="home.php" class="small">Inicio</a>
+                <a href="/vista/home.php" class="small">Inicio</a>
             </div>
         </div>
     </div>
