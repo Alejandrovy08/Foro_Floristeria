@@ -100,7 +100,7 @@
         <section class="nuevo-comentario card-figma mb-4">
             <h2 class="h4 mb-3">Deja tu comentario</h2>
             <?php if ($usuarioLogeado): ?>
-                <form class="form-figma" action="/controlador/"ComentarioController.php" method="POST">
+                <form class="form-figma" action="/controlador/ComentarioController.php" method="POST">
                     <input type="hidden" name="publicacion_id" value="<?php echo $publicacionId; ?>">
                     <div class="mb-3">
                         <label class="form-label" for="texto-comentario">Comentario</label>

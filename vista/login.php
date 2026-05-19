@@ -21,7 +21,7 @@
                 <p class="feedback <?php echo (($_GET['ok'] ?? '') === '1') ? 'ok' : 'error'; ?>"><?php echo htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'); ?></p>
             <?php endif; ?>
 
-            <form class="form-figma" method="post" action="/controlador/"UsuarioController.php">
+            <form class="form-figma" method="post" action="/controlador/UsuarioController.php">
                 <div class="mb-3">
                     <label class="form-label" for="correo">Correo</label>
                     <input type="email" class="form-control" id="correo" name="correo" required>

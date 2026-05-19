@@ -49,7 +49,7 @@
         <?php endif; ?>
 
         <div class="card-figma mb-4">
-            <form class="form-figma" method="post" action="/controlador/"UsuarioController.php">
+            <form class="form-figma" method="post" action="/controlador/UsuarioController.php">
                 <input type="hidden" name="accion" value="editar_usuario_admin">
                 <input type="hidden" name="usuario_id" value="<?php echo (int) $id; ?>">
                 <div class="mb-3">
@@ -66,7 +66,7 @@
 
         <div class="card-figma">
             <h2 class="h5 mb-3">Cambiar contraseña</h2>
-            <form class="form-figma" method="post" action="/controlador/"UsuarioController.php">
+            <form class="form-figma" method="post" action="/controlador/UsuarioController.php">
                 <input type="hidden" name="accion" value="cambiar_password_usuario_admin">
                 <input type="hidden" name="usuario_id" value="<?php echo (int) $id; ?>">
                 <div class="mb-4">

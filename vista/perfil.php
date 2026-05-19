@@ -48,7 +48,7 @@
 
                 <div class="perfil-panel mb-4">
                     <h2 class="h4 mb-3">Datos personales</h2>
-                    <form class="form-figma" method="post" action="/controlador/"UsuarioController.php">
+                    <form class="form-figma" method="post" action="/controlador/UsuarioController.php">
                         <input type="hidden" name="accion" value="editar_perfil">
 
                         <div class="mb-3">
@@ -81,7 +81,7 @@
 
                 <div class="perfil-panel mb-4">
                     <h2 class="h4 mb-3">Cambiar contraseña</h2>
-                    <form class="form-figma" method="post" action="/controlador/"UsuarioController.php">
+                    <form class="form-figma" method="post" action="/controlador/UsuarioController.php">
                         <input type="hidden" name="accion" value="cambiar_password">
 
                         <div class="mb-4">
@@ -95,7 +95,7 @@
 
                 <div class="perfil-panel">
                     <h2 class="h4 mb-3">Zona de baja</h2>
-                    <form method="post" action="/controlador/"UsuarioController.php">
+                    <form method="post" action="/controlador/UsuarioController.php">
                         <input type="hidden" name="accion" value="baja_usuario">
                         <button class="btn-figma-danger" type="submit">Eliminar mi cuenta</button>
                     </form>

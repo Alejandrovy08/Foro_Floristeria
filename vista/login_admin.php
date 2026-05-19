@@ -19,7 +19,7 @@ require __DIR__ . '/partials/header.php';
                 <p class="feedback error"><?php echo htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'); ?></p>
             <?php endif; ?>
 
-            <form class="form-figma" method="post" action="/controlador/"AdminController.php">
+            <form class="form-figma" method="post" action="/controlador/AdminController.php">
                 <input type="hidden" name="accion" value="login_admin">
 
                 <div class="mb-3">

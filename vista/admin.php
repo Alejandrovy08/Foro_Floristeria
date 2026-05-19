@@ -181,7 +181,7 @@
                 <p class="feedback ok">Los cambios se guardaron correctamente.</p>
             <?php endif; ?>
 
-            <form class="form-figma mb-4" method="post" action="/controlador/"AdminController.php">
+            <form class="form-figma mb-4" method="post" action="/controlador/AdminController.php">
                 <input type="hidden" name="accion" value="editar_perfil_admin">
                 <div class="mb-3">
                     <label class="form-label" for="admin-nombre">Nombre</label>
@@ -201,7 +201,7 @@
             </form>
 
             <h3 class="h5 mb-3">Cambiar Contraseña</h3>
-            <form class="form-figma" method="post" action="/controlador/"AdminController.php">
+            <form class="form-figma" method="post" action="/controlador/AdminController.php">
                 <input type="hidden" name="accion" value="cambiar_password_admin">
                 <div class="mb-3">
                     <label class="form-label" for="admin-nueva-password">Nueva contraseña</label>

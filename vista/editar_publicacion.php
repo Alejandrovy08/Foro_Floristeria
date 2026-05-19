@@ -58,7 +58,7 @@
                                 <img src="<?php echo $srcThumb; ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                         <?php endif; ?>
-                            <form method="post" action="/controlador/"PublicacionController.php" class="mt-2">
+                            <form method="post" action="/controlador/PublicacionController.php" class="mt-2">
                                 <input type="hidden" name="accion" value="eliminar_imagen">
                                 <input type="hidden" name="imagen_id" value="<?php echo $imgId; ?>">
                                 <input type="hidden" name="publicacion_id" value="<?php echo (int) $id; ?>">
@@ -72,7 +72,7 @@
 
         <h2 class="form-section-title">Datos y nueva imagen</h2>
         <div class="card-figma">
-            <form class="form-figma" action="/controlador/"PublicacionController.php" method="post" enctype="multipart/form-data">
+            <form class="form-figma" action="/controlador/PublicacionController.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="accion" value="editar_publicacion">
                 <input type="hidden" name="id" value="<?php echo htmlspecialchars((string) $publicacion['id'], ENT_QUOTES, 'UTF-8'); ?>">
 
