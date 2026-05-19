@@ -1,4 +1,5 @@
 <?php
+die("EL ARCHIVO QUE SE ESTÁ EJECUTANDO ES: " . __FILE__);
 
 require_once __DIR__ . '/../config/Database.php';
 
