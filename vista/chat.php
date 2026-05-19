@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    <form class="form-chat" method="post" action="../controlador/ChatController.php" style="flex-shrink: 0; background-color: #ffffff; border-top: 1px solid rgba(0,0,0,0.08); padding: 1rem; display: flex; justify-content: center; align-items: center; width: 100%;">
+    <form class="form-chat" method="post" action="/controlador/"ChatController.php" style="flex-shrink: 0; background-color: #ffffff; border-top: 1px solid rgba(0,0,0,0.08); padding: 1rem; display: flex; justify-content: center; align-items: center; width: 100%;">
         <div style="display: flex; gap: 0.75rem; width: 100%; max-width: 1200px; margin: 0 auto; align-items: center;">
             <?php if ($esRemitenteAdmin && $usuarioChatId > 0): ?>
                 <input type="hidden" name="usuario_id" value="<?php echo (int) $usuarioChatId; ?>">

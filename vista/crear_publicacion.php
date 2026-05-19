@@ -15,7 +15,7 @@
         <?php endif; ?>
 
         <div class="card-figma">
-            <form class="form-figma" action="../controlador/PublicacionController.php" method="post" enctype="multipart/form-data">
+            <form class="form-figma" action="/controlador/"PublicacionController.php" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="accion" value="guardar_publicacion">
 
                 <div class="mb-3">
