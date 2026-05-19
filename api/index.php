@@ -11,7 +11,7 @@ if ($uri === '/' || $uri === '/index.php') {
 if (preg_match('/\/([^\/]+\.php)$/', $uri, $matches)) {
     $archivo_final = $matches[1];
     
-    // Si es un controlador, lo buscamos en su sitio
+    // ATENCIÓN: Aquí NO debe llevar barra "/" antes de controlador dentro del strpos
     if (strpos($uri, 'controlador/') !== false) {
         $controlador_path = __DIR__ . '/../controlador/' . $archivo_final;
         if (file_exists($controlador_path)) {
