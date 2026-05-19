@@ -4,36 +4,49 @@ require_once __DIR__ . '/../config/Database.php';
 
 class Administrador
 {
-    //Funcion para comprobar si ha iniciado sesion un usuario y es administracion
-    public function login($correo, $password) {
-        //Crea una nueva instancia de la clase Database
-        $database = new Database();
-        $db = $database->getConnection();
-        //Crea una consulta SQL para seleccionar el id,nombre,correo y contraseña del administrador
-        $query = "SELECT id, nombre, correo, contrasena FROM ADMINISTRADOR WHERE correo = :correo LIMIT 1";
-        //Prepara la consulta SQL
-        $stmt = $db->prepare($query);
-        //Asigna el valor del correo a la consulta
-        $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
-        //Ejecuta la consulta
-        $stmt->execute();
-        //Obtiene el resultado de la consulta
-        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
-        //Comprueba si el administrador no existe
-        if (!$admin) {
-            return false;
-        }
-        //Comprueba si la contraseña esta vacia o no es correcta
-        if (!isset($admin['contrasena']) || !password_verify($password, $admin['contrasena'])) {
-            return false;
-        }
-        //Devuelve el id y el nombre del administrador
+   //Funcion para comprobar si ha iniciado sesion un usuario y es administracion
+   public function login($correo, $password) {
+    //Crea una nueva instancia de la clase Database
+    $database = new Database();
+    $db = $database->getConnection();
+    //Crea una consulta SQL para seleccionar el id,nombre,correo y contraseña del administrador
+    $query = "SELECT id, nombre, correo, contrasena FROM ADMINISTRADOR WHERE correo = :correo LIMIT 1";
+    //Prepara la consulta SQL
+    $stmt = $db->prepare($query);
+    //Asigna el valor del correo a la consulta
+    $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
+    //Ejecuta la consulta
+    $stmt->execute();
+    //Obtiene el resultado de la consulta
+    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+    //Comprueba si el administrador no existe
+    if (!$admin) {
+        return false;
+    }
+
+    // =========================================================================
+    // TRUCO TEMPORAL PARA FORZAR EL ACCESO:
+    // Si pones la contraseña 'Admin1234*' te dejará entrar directamente 
+    // saltándose el hash corrupto de Railway.
+    // =========================================================================
+    if ($password === 'Admin1234*') {
         return [
             'id' => $admin['id'],
             'nombre' => $admin['nombre']
         ];
     }
+    // =========================================================================
 
+    //Comprueba si la contraseña esta vacia o no es correcta (Búsqueda por hash estándar)
+    if (!isset($admin['contrasena']) || !password_verify($password, $admin['contrasena'])) {
+        return false;
+    }
+    //Devuelve el id y el nombre del administrador
+    return [
+        'id' => $admin['id'],
+        'nombre' => $admin['nombre']
+    ];
+}
     //Funcion con la que obtenemos los datos de un usuario mediante su ID
     public function obtenerPorId($id) {
         $database = new Database();
