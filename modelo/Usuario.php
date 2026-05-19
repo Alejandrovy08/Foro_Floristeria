@@ -166,34 +166,7 @@ class Usuario {
         }
     }
 
-    // Funcion para registrar un administrador de forma nativa e interna
-    public function registrarAdmin($nombre, $correo, $password, $telefono) {
-        $database = new Database();
-        $db = $database->getConnection();
-
-        // Encriptamos usando PASSWORD_BCRYPT (genera un hash de 60 caracteres perfecto)
-        $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        if ($passwordHash === false) {
-            return false;
-        }
-
-        $query = "INSERT INTO ADMINISTRADOR (nombre, correo, contrasena, telefono) VALUES (:nombre, :correo, :contrasena, :telefono)";
-
-        try {
-            $stmt = $db->prepare($query);
-            $stmt->bindParam(':nombre', $nombre, PDO::PARAM_STR);
-            $stmt->bindParam(':correo', $correo, PDO::PARAM_STR);
-            $stmt->bindParam(':contrasena', $passwordHash, PDO::PARAM_STR);
-            $stmt->bindParam(':telefono', $telefono, PDO::PARAM_STR);
-
-            return $stmt->execute();
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
-
     
 }
-
 
 ?>
