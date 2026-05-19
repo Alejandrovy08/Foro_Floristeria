@@ -1,4 +1,5 @@
 ﻿<?php
+    ob_start();
     session_start();
     
     //Cargamos los modelos de los usuarios para hacer uso de las funciones de los usuarios
